@@ -18,11 +18,11 @@ const user = new mongoose.Schema({
   });
 
   user.methods.generateAuthToken = () =>{
-    const token = jwt.sign({_id: this._id}, process.env.JWTPRIVATEKEY);
+    const token = jwt.sign({ _id: this._id}, process.env.JWTPRIVATEKEY);
     return token;
   }
 
-const User = mongoose.model('User', user);
+const User = mongoose.model('user', user);
 
 const validate = (user) => {
   const schema = Joi.object({

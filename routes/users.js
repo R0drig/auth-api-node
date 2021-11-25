@@ -1,7 +1,8 @@
-const {User, validate} = require('../models/user');
-const auth = require('../controller/auth');
-const express = require("express");
-const bcrypt = require("bcrypt");
+const {User, validate} = require('../models/user')
+const mongoose = require('mongoose')
+const auth = require('../controller/auth')
+const express = require("express")
+const bcrypt = require("bcrypt")
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -23,13 +24,12 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
-  try {
-      const user = await User.findById(req.user._id).select("-password -__v");
-      res.send(user);
-  } catch (error) {
-      console.log(error);
-      res.send("An error occured");
-  }
+    try {
+        const user = await User.findById(req.user._id).select("-password -__v");
+        res.send(user);
+    } catch (error) {
+        console.log(error);
+        res.send("An error occured");
+    }
 });
-
 module.exports = router;
